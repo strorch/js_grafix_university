@@ -4,27 +4,15 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link href="css/style.css" type="text/css" rel="stylesheet"/>
-    <script src="js/operations.js"></script>
+    <script type="text/javascript" src="js/utils.js"></script>
+    <script type="text/javascript" src="js/lib/math.js"></script>
+    <script type="text/javascript" src="js/operations.js"></script>
+    <script type="text/javascript" src="js/header.js"></script>
 </head>
 <body id="body">
-<script type="text/javascript">
-    var figure =[
-        [-100,100, 1],
-        [100,-100, 1],
-        [100,100, 1],
-        [-100,-100, 1]
-    ];
-    var moved = { 
-        'x': 0, 
-        'y': 0
-    };
-    var status = 0;
-</script>
-<script type="text/javascript" src="js/lib/math.js"></script>
-<script type="text/javascript" src="js/operations.js"></script>
 <div id="main_block">
     <div id="canvas">
-        <canvas id="myCanvas" width="800" height="500" style="border:1px solid #d3d3d3;"></canvas>
+        <canvas id="myCanvas" width="800" height="500" style="border:2px solid black;"></canvas>
     </div>
     <div id="buttons">
         <div class='top_butt'>
@@ -40,19 +28,49 @@
             <input type="radio" name="move" value="reflect" onclick="status = 3"/>
         </div>
     </div>
+    <div>
+        <div class='top_butt'>
+            <input type="radio" name="point" value="move" onclick="point = false" checked />
+        </div>
+        <div class='butt'>
+            <input type="radio" name="point" value="move" onclick="point = true" />
+        </div>
+    </div>
+    <div>
+        <div class='top_butt'>
+            <input id="a" type="input" name="reflect" value=""/>
+        </div>
+        <div class='butt'>
+            <input id="b" type="input" name="reflect" value=""/>
+        </div>
+        <div class='butt'>
+            <input type="button" name="refl" value="line" onclick="drawLine()" />
+        </div>
+        <div class='butt'>
+            <input type="button" name="refl" value="reflect" onclick="reflect()" />
+        </div>
+    </div>
 </div>
 <script type="text/javascript">
+
     var canvas = document.getElementById("myCanvas");
     var context = canvas.getContext("2d");
-
-    // if (status === 0)
-    // {
-        canvas.onmousedown = function (e) {
+    drawFigure(context, figure, canvas);
+    //drawLine(context, canvas);
+    canvas.onmousedown = function (e) {
+        if (point === true) {
+            rot_p['x'] = e.x
+            rot_p['y'] = e.y;
+        }
+        if (point === false)
+        {
             var moveAt = function (e){
                 if (status == 0)
-                    figure = move(figure, context, canvas, e);
+                    figure = move_m(figure, moved, context, canvas, e);
                 else if (status == 1)
-                    figure = push_m(figure, context, canvas, e);
+                    figure = push_m(figure, moved, context, canvas, e);
+                else if (status == 2)
+                    figure = rotate_m(figure, rot_p, context, canvas, e);
             };
 
             document.onmousemove = function (e) {
@@ -63,43 +81,20 @@
                 document.onmousemove = null;
                 canvas.onmouseup = null;
             };
-        };
-    // }
-    
-    drawFigure(context, figure, canvas);
-</script>
-<script>
+            drawFigure(context, figure, canvas);
+            context.fillRect(rot_p['x']  - 90, rot_p['y'] - 5, 5,5);
+        }
+        if (point === true) {
+            drawFigure(context, figure, canvas);
+            context.fillRect(rot_p['x']  - 90, rot_p['y'] - 5, 5,5);
+        }
+        
+    };
 
-    var ox_m = [
-        [-1, 0,  0],
-        [0,  1,  0],
-        [0,  0,  1],
-    ];
-    var oy_m = [
-        [1,  0,  0],
-        [0,  -1, 0],
-        [0,  0,  1],
-    ];
-
-    var angle = 60.0;
-    var rot_m = [
-        [Math.cos(angle),  Math.sin(angle),  0],
-        [-Math.sin(angle), Math.cos(angle),  0],
-        [0,                0,                1],
-    ];
-
-    var m_fig = math.matrix(figure);
-
-
-
-    //drawFigure(context, figure, canvas);
-
-    // context.clearRect(0, 0, canvas.width, canvas.height);
-    // window.onload = function() {
-    //     var m_fig = math.matrix(this.figure);
-    //     drawFigure(context, m_fig.valueOf());
-    // }
-
+    var reflect = function() {
+        if (status == 3)
+            reflect_point(figure, rot_p, context, canvas);
+    };
 </script>
 </body>
 </html>
