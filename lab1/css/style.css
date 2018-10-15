@@ -1,0 +1,24 @@
+#body {
+    position: relative;
+}
+
+#main_block {
+    display: flex;
+    justify-content: center;
+}
+
+#canvas {
+    border: 2px solid black;
+}
+
+#buttons {
+    position: relative;
+}
+
+.butt {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1vw;
+    /*background-color: aquamarine;*/
+    /*border: none;*/
+}

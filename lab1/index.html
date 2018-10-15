@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="css/style.css" type="text/css" rel="stylesheet"/>
+    <script src="js/operations.js"></script>
+</head>
+<body id="body">
+<script type="text/javascript">
+    var figure =[
+        [-100,100, 1],
+        [100,-100, 1],
+        [100,100, 1],
+        [-100,-100, 1]
+    ];
+    var moved = { 
+        'x': 0, 
+        'y': 0
+    };
+    var status = 0;
+</script>
+<script type="text/javascript" src="js/lib/math.js"></script>
+<script type="text/javascript" src="js/operations.js"></script>
+<div id="main_block">
+    <div id="canvas">
+        <canvas id="myCanvas" width="800" height="500" style="border:1px solid #d3d3d3;"></canvas>
+    </div>
+    <div id="buttons">
+        <div class='top_butt'>
+            <input type="radio" name="move" value="move" onclick="status = 0" checked />
+        </div>
+        <div class='butt'>
+            <input type="radio" name="move" value="move1" onclick="status = 1"/>
+        </div>
+       <div class='butt'>
+            <input type="radio" name="move" value="cleat" onclick="status = 2"/>
+        </div> 
+        <div class='butt'>
+            <input type="radio" name="move" value="reflect" onclick="status = 3"/>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var canvas = document.getElementById("myCanvas");
+    var context = canvas.getContext("2d");
+
+    // if (status === 0)
+    // {
+        canvas.onmousedown = function (e) {
+            var moveAt = function (e){
+                if (status == 0)
+                    figure = move(figure, context, canvas, e);
+                else if (status == 1)
+                    figure = push_m(figure, context, canvas, e);
+            };
+
+            document.onmousemove = function (e) {
+                moveAt(e);
+            };
+
+            canvas.onmouseup = function (e){
+                document.onmousemove = null;
+                canvas.onmouseup = null;
+            };
+        };
+    // }
+    
+    drawFigure(context, figure, canvas);
+</script>
+<script>
+
+    var ox_m = [
+        [-1, 0,  0],
+        [0,  1,  0],
+        [0,  0,  1],
+    ];
+    var oy_m = [
+        [1,  0,  0],
+        [0,  -1, 0],
+        [0,  0,  1],
+    ];
+
+    var angle = 60.0;
+    var rot_m = [
+        [Math.cos(angle),  Math.sin(angle),  0],
+        [-Math.sin(angle), Math.cos(angle),  0],
+        [0,                0,                1],
+    ];
+
+    var m_fig = math.matrix(figure);
+
+
+
+    //drawFigure(context, figure, canvas);
+
+    // context.clearRect(0, 0, canvas.width, canvas.height);
+    // window.onload = function() {
+    //     var m_fig = math.matrix(this.figure);
+    //     drawFigure(context, m_fig.valueOf());
+    // }
+
+</script>
+</body>
+</html>
