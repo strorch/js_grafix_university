@@ -63,9 +63,11 @@ var rotate_m= function (figure, moved, context, canvas, e) {
 
 var reflect_point = function (figure, moved, context, canvas) {
     //y = 1/2 * x + 0
+    //console.log(a + ' ' + b);
+    
     var p2 = {
-        x: 3, //always 1
-        y: 2  // value
+        x: 1, //always 1
+        y: parseInt(a) + parseInt(b)  // value
     };
 
     var p1 = {
@@ -78,7 +80,7 @@ var reflect_point = function (figure, moved, context, canvas) {
     angle = (math.atan2(p2.y, p2.x) - math.atan2(p1.y, p1.x)) * 180 / Math.PI;
     ///console.log(angle * 180 / Math.PI);
 
-    var n = 0;
+    var n = parseInt(b);
     var m_fig = math.matrix(figure);
     var reflect = [
         [1,  0,  0],
