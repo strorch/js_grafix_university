@@ -15,3 +15,6 @@ var rot_p = {
 var status = 0;
 var point = false;
 var reflect_status = false;
+
+var a = 0;
+var b = 0;

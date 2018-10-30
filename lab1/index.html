@@ -9,39 +9,48 @@
     <script type="text/javascript" src="js/operations.js"></script>
     <script type="text/javascript" src="js/header.js"></script>
 </head>
-<body id="body">
+<body id="body" style="background-color: #f6f6f6">
 <div id="main_block">
     <div id="canvas">
-        <canvas id="myCanvas" width="800" height="500" style="border:2px solid black;"></canvas>
+        <canvas id="myCanvas" width="800" height="500"></canvas>
     </div>
     <div id="buttons">
+        Transform mode
         <div class='top_butt'>
-            <input type="radio" name="move" value="move" onclick="status = 0" checked />
+            Move
+            <input type="radio" name="move" value="move" onclick="status = 0"/>
         </div>
         <div class='butt'>
+            Collapse
             <input type="radio" name="move" value="move1" onclick="status = 1"/>
         </div>
        <div class='butt'>
+            Rotate
             <input type="radio" name="move" value="cleat" onclick="status = 2"/>
         </div> 
         <div class='butt'>
-            <input type="radio" name="move" value="reflect" onclick="status = 3"/>
+            Reflect
+            <input type="radio" name="move" value="reflect" onclick="status = 3"  checked />
         </div>
     </div>
-    <div>
+    <div id="buttons">
+        Point mode
         <div class='top_butt'>
+            Disabled
             <input type="radio" name="point" value="move" onclick="point = false" checked />
         </div>
         <div class='butt'>
+            Enabled
             <input type="radio" name="point" value="move" onclick="point = true" />
         </div>
     </div>
-    <div>
+    <div id="buttons">
+        Reflect line
         <div class='top_butt'>
-            <input id="a" type="input" name="reflect" value=""/>
+            <input id="a" type="input" name="reflect" value="3"/>
         </div>
         <div class='butt'>
-            <input id="b" type="input" name="reflect" value=""/>
+            <input id="b" type="input" name="reflect" value="100"/>
         </div>
         <div class='butt'>
             <input type="button" name="refl" value="line" onclick="drawLine()" />
@@ -52,7 +61,6 @@
     </div>
 </div>
 <script type="text/javascript">
-
     var canvas = document.getElementById("myCanvas");
     var context = canvas.getContext("2d");
     drawFigure(context, figure, canvas);
@@ -82,18 +90,26 @@
                 canvas.onmouseup = null;
             };
             drawFigure(context, figure, canvas);
-            context.fillRect(rot_p['x']  - 90, rot_p['y'] - 5, 5,5);
+            context.fillRect(rot_p['x'] , rot_p['y'] - 5, 5,5);
         }
         if (point === true) {
             drawFigure(context, figure, canvas);
-            context.fillRect(rot_p['x']  - 90, rot_p['y'] - 5, 5,5);
+            context.fillRect(rot_p['x'] , rot_p['y'] - 5, 5,5);
         }
         
     };
 
     var reflect = function() {
-        if (status == 3)
-            reflect_point(figure, rot_p, context, canvas);
+        reflect_point(figure, rot_p, context, canvas);
+        
+        var s= [-500 , -500 * a + b];
+        var f= [500, 500 * a + b];
+        context.beginPath();
+        context.moveTo(f[0] + 800 / 2, -(f[1]) + 500 / 2);
+        context.lineTo(s[0] + 800 / 2, -(s[1]) + 500 / 2);
+        context.closePath();
+        context.stroke();
+        // console.log(a);
     };
 </script>
 </body>

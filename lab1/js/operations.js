@@ -58,42 +58,30 @@ var rotate_m= function (figure, moved, context, canvas, e) {
     var m_move = math.matrix(rot_m);
     var result = math.multiply(m_fig, m_move);
     drawFigure(context, result.valueOf(), canvas);
+    context.fillRect(rot_p['x'] , rot_p['y'] - 5, 5,5);
     return result.valueOf();
 };
 
 var reflect_point = function (figure, moved, context, canvas) {
-    //y = 1/2 * x + 0
-    var p2 = {
-        x: 3, //always 1
-        y: 2  // value
-    };
-
-    var p1 = {
-        x: 1,
-        y: 0
-    };
-
-    // angle in radians
-    var angleRadians = Math.atan2(p2.y - p1.y, p2.x - p1.x);
-    angle = (math.atan2(p2.y, p2.x) - math.atan2(p1.y, p1.x)) * 180 / Math.PI;
-    ///console.log(angle * 180 / Math.PI);
-
-    var n = 0;
+    
+    var angle = math.atan(a);
+    console.log(angle);
+    var n = -b;
     var m_fig = math.matrix(figure);
     var reflect = [
-        [1,  0,  0],
-        [0,  -1, 0],
+        [1, 0,  0],
+        [0,  -1,  0],
         [0,  0,  1],
     ];
     var move1 = [
         [1,  0,  0],
-        [0,  1, 0],
+        [0,  1,  0],
         [0,  n,  1],
     ];
     var move2 = [
         [1,  0,  0],
-        [0,  1, 0],
-        [0,  -n,  1],
+        [0,  1,  0],
+        [0,  -n, 1],
     ];
     var rotate1 = [
         [Math.cos(angle),                            Math.sin(angle),                            0],
@@ -112,10 +100,11 @@ var reflect_point = function (figure, moved, context, canvas) {
     var m_rotate2 = math.matrix(rotate2);
     var m_reflect = math.matrix(reflect);
 
-    var f = math.multiply(m_move2, m_rotate1);
+    var f = math.multiply(m_move1, m_rotate2);
     var s = math.multiply(f, m_reflect);
-    var t = math.multiply(s, m_rotate2);
-    var last = math.multiply(t, m_move1);
+    var t = math.multiply(s, m_rotate1);
+    var last = math.multiply(t, m_move2);
+
     var result = math.multiply(m_fig, last);
     
     drawFigure(context, result.valueOf(), canvas);

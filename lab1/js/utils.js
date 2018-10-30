@@ -23,10 +23,9 @@ var drawLine = function()
     var context = canvas.getContext("2d");
     drawFigure(context, figure, canvas);
 
-	var a = document.getElementById('a').value.toString();
-	var b = document.getElementById('b').value.toString();
+	a = parseFloat(document.getElementById('a').value);
+	b = parseFloat(document.getElementById('b').value);
 
-    console.log(a + " " + b);
     var s= [-500 , -500 * a + b];
     var f= [500, 500 * a + b];
 	context.beginPath();
