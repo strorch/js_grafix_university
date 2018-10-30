@@ -62,8 +62,7 @@ var rotate_m= function (figure, moved, context, canvas, e) {
     return result.valueOf();
 };
 
-var reflect_point = function (figure, moved, context, canvas) {
-    
+var reflect_point = function (figure, moved, context, canvas) {    
     var angle = math.atan(a);
     console.log(angle);
     var n = -b;
