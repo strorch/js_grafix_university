@@ -8,6 +8,8 @@
     <script type="text/javascript" src="js/lib/math.js"></script>
     <script type="text/javascript" src="js/operations.js"></script>
     <script type="text/javascript" src="js/header.js"></script>
+    <script src="js/App.js"></script>
+    <script src="js/main.js"></script>
 </head>
 <body id="body" style="background-color: #f6f6f6">
 <div id="main_block">
@@ -18,9 +20,9 @@
         Transform mode
         <div class='top_butt'>
             Move
-            <input type="radio" name="move" value="move" onclick="status = 0"/>
+            <input type="button" name="move" value="move"/>
         </div>
-        <div class='butt'>
+        <!-- <div class='butt'>
             Collapse
             <input type="radio" name="move" value="move1" onclick="status = 1"/>
         </div>
@@ -31,20 +33,9 @@
         <div class='butt'>
             Reflect
             <input type="radio" name="move" value="reflect" onclick="status = 3"  checked />
-        </div>
+        </div> -->
     </div>
-    <div id="buttons">
-        Point mode
-        <div class='top_butt'>
-            Disabled
-            <input type="radio" name="point" value="move" onclick="point = false" checked />
-        </div>
-        <div class='butt'>
-            Enabled
-            <input type="radio" name="point" value="move" onclick="point = true" />
-        </div>
-    </div>
-    <div id="buttons">
+    <!-- <div id="buttons">
         Reflect line
         <div class='top_butt'>
             <input id="a" type="input" name="reflect" value="3"/>
@@ -58,49 +49,7 @@
         <div class='butt'>
             <input type="button" name="refl" value="reflect" onclick="reflect()" />
         </div>
-    </div>
+    </div> -->
 </div>
-<script type="text/javascript">
-    var canvas = document.getElementById("myCanvas");
-    var context = canvas.getContext("2d");
-    drawFigure(context, figure, canvas);
-    //drawLine(context, canvas);
-    canvas.onmousedown = function (e) {
-        if (point === true) {
-            rot_p['x'] = e.x
-            rot_p['y'] = e.y;
-        }
-        if (point === false)
-        {
-            var moveAt = function (e){
-                if (status == 0)
-                    figure = move_m(figure, moved, context, canvas, e);
-                else if (status == 1)
-                    figure = push_m(figure, moved, context, canvas, e);
-                else if (status == 2)
-                    figure = rotate_m(figure, rot_p, context, canvas, e);
-            };
-
-            document.onmousemove = function (e) {
-                moveAt(e);
-            };
-
-            canvas.onmouseup = function (e){
-                document.onmousemove = null;
-                canvas.onmouseup = null;
-            };
-            drawFigure(context, figure, canvas);
-            context.fillRect(rot_p['x'] , rot_p['y'] - 5, 5,5);
-        }
-        if (point === true) {
-            drawFigure(context, figure, canvas);
-            context.fillRect(rot_p['x'] , rot_p['y'] - 5, 5,5);
-        }
-        
-    };
-
-    var reflect = function() {
-    };
-</script>
 </body>
 </html>
