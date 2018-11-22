@@ -1,9 +1,0 @@
-﻿D:\VisualStudio\IDE\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(391,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (Project1.vcxproj).  This can lead to incorrect clean and rebuild behavior.
-  main.c
-c:\users\asus\desktop\graphix\lab2_c\project1\main.c(30): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\asus\desktop\graphix\lab2_c\project1\main.c(34): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-c:\users\asus\desktop\graphix\lab2_c\project1\main.c(35): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-c:\users\asus\desktop\graphix\lab2_c\project1\main.c(25): warning C4101: 'dz': unreferenced local variable
-c:\users\asus\desktop\graphix\lab2_c\project1\main.c(136): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-c:\users\asus\desktop\graphix\lab2_c\project1\main.c(146): warning C4101: 'dst_r': unreferenced local variable
-  Project1.vcxproj -> C:\Users\ASUS\Desktop\graphix\lab2_c\Debug\laba2.exe

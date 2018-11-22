@@ -3,10 +3,21 @@ class App
     constructor()
     {
         this.figure = App.initialize_figure();
+        this.angle = [20, -20, 20];
         this.moved = { 
             'x': 0, 
             'y': 0
         };
+        this.rot_p = {
+            'x': 0, 
+            'y': 0
+        };
+        this.axisMap = [
+            [0, 0 , 0],
+            [0, 100, 0],
+            [100, 0, 0],
+            [0, 0, 100],
+        ];
     }
 
     static initialize_figure()
@@ -21,26 +32,57 @@ class App
         return figure;
     }
 
+    draw_field(context, canvas, angle)
+    {
+        Utils.clear_window(context, canvas);
+        //Utils.drawAxiss(context, this.axisMap);
+        let new_arr = [];
+        this.axisMap.forEach( (item) => {
+            new_arr.push( Operations.rotate_ort(item, angle));
+        });
+        Utils.drawAxiss(context, new_arr);
+        // Utils.drawFigure(context, new_arr);
+    }
+
     init()
-    {   
-        var moved = { 
-            'x': 0, 
-            'y': 0
-        };
-        var rot_p = {
-            'x': 0, 
-            'y': 0
-        };
-        var status = 0;
-        var point = false;
-        var reflect_status = false;
-        
-        var a = 0;
-        var b = 0;
-        var canvas = document.getElementById("myCanvas");
-        var context = canvas.getContext("2d");
-        Utils.drawFigure(context, this.figure, canvas);
-        //drawLine(context, canvas);
+    {
+        let canvas = document.getElementById("myCanvas");
+        let context = canvas.getContext("2d");
+
+        Utils.clear_window(context, canvas);
+        this.draw_field(context, canvas, this.angle);
+
+        document.addEventListener('keydown', (e) => {
+            let key = e.key;
+            //console.log(this.angle);
+            if (key == 'w') {
+                this.angle[0] += 5;
+                this.draw_field(context, canvas, this.angle);
+            }
+            else if (key == 's') {
+                this.angle[0] += -5;
+                this.draw_field(context, canvas, this.angle);
+            }
+            else if (key == 'a') {
+                this.angle[1] += 5;
+                this.draw_field(context, canvas, this.angle);
+            }
+            else if (key == 'd') {
+                this.angle[1] += -5;
+                this.draw_field(context, canvas, this.angle);
+            }
+            else if (key == 'q') {
+                this.angle[2] += 5;
+                this.draw_field(context, canvas, this.angle);
+            }
+            else if (key == 'e') {
+                this.angle[2] += -5;
+                this.draw_field(context, canvas, this.angle);
+            }
+            else
+                return;
+        });
+
         // canvas.onmousedown = (e) => {
         //     if (point === true) {
         //         rot_p['x'] = e.x

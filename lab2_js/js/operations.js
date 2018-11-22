@@ -2,7 +2,32 @@
 class Operations
 {
 
-    static move_help(mx, my, figure)
+    static rotate_ort(point1, rot1)
+    {
+        let point = {x:point1[0],y:point1[1],z:point1[2]}
+        let rot = {x:rot1[0],y:rot1[1],z:rot1[2]}
+        let od={x:0,y:0,z:0};
+        let dv={x:0,y:0,z:0};
+        let tr={x:0,y:0,z:0};
+        let rot_rad={x:0,y:0,z:0};
+    
+        rot_rad.x = rot.x * Math.PI / 180.0;
+        rot_rad.y = rot.y * Math.PI / 180.0;
+        rot_rad.z = rot.z * Math.PI / 180.0;
+        od.x = point.x;
+        od.y = point.y * Math.cos(rot_rad.x) + point.z * Math.sin(rot_rad.x);
+        od.z = point.z * Math.cos(rot_rad.x) - point.y * Math.sin(rot_rad.x);
+        dv.x = od.x * Math.cos(rot_rad.y) - od.z * Math.sin(rot_rad.y);
+        dv.y = od.y;
+        dv.z = od.z * Math.cos(rot_rad.y) + od.x * Math.sin(rot_rad.y);
+        tr.x = dv.x * Math.cos(rot_rad.z) + dv.y * Math.sin(rot_rad.z);
+        tr.y = dv.y * Math.cos(rot_rad.z) - dv.x * Math.sin(rot_rad.z);
+        tr.z = dv.z;
+        return [tr.x, tr.y, tr.z];
+    }
+
+
+    /*static move_help(mx, my, figure)
     {
         let m_fig = math.matrix(figure);
 
@@ -112,5 +137,5 @@ class Operations
         
         drawFigure(context, result.valueOf(), canvas);
         return result.valueOf();
-    }
+    }*/
 }
