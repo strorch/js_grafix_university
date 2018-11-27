@@ -23,7 +23,26 @@ class Operations
         tr.x = dv.x * Math.cos(rot_rad.z) + dv.y * Math.sin(rot_rad.z);
         tr.y = dv.y * Math.cos(rot_rad.z) - dv.x * Math.sin(rot_rad.z);
         tr.z = dv.z;
-        return [tr.x, tr.y, tr.z];
+        return [tr.x, tr.y, tr.z, 1];
+    }
+
+    static move_figure(figure, tab)
+    {
+        let new_fig = [];
+        figure.forEach(element => {
+            let tmp = [];
+            tmp[0] = element[0] + tab[0];
+            tmp[1] = element[1] + tab[1];
+            tmp[2] = element[2] + tab[2];
+            new_fig.push(tmp);
+        });
+        return new_fig;
+    }
+    
+    static push_figure(figure, tab)
+    {
+        
+        return new_fig;
     }
 
 

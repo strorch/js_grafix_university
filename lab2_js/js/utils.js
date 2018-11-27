@@ -12,13 +12,12 @@ class Utils
             while (++j < 10)
             {
                 if (j + 1 < 10)
-                    Utils.drawLine(context,figure[i * 6 + j], figure[i * 6 + j + 1]);
+                    Utils.drawLine(context,figure[i * 6 + j], figure[i * 6 + j + 1], '#000000');
                 if (i + 1 < 6)
-                    Utils.drawLine(context,figure[i * 6 + j], figure[(i  + 1) * 6 + j]);
+                    Utils.drawLine(context,figure[i * 6 + j], figure[(i  + 1) * 6 + j], '#000000');
             }
         }
     }
-    
     
     static drawLine(context, f, s,color)
     {

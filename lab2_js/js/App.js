@@ -1,13 +1,17 @@
 class App 
 {
+    /*
+
+    триметрія, кабінетна, триточкова перспективна
+
+    обертання відносно рухомої осі, паралельна Оу і пересувається z2 + x2 = R2 
+    
+    */
     constructor()
     {
         this.figure = App.initialize_figure();
-        this.angle = [20, -20, 20];
-        this.moved = { 
-            'x': 0, 
-            'y': 0
-        };
+        this.angle = [0, 0, 0];
+        this.moved = [1, 1, 1];
         this.rot_p = {
             'x': 0, 
             'y': 0
@@ -26,21 +30,47 @@ class App
 
         for (let i = 0; i < 6; i++) {
             for (let j = 0; j < 10; j++) {
-                figure.push([i * 20, j * 20, Math.random()*10]);
+                figure.push([i * 30, j * 30, Math.random()*15, 1]);
             }
         }
         return figure;
     }
-
-    draw_field(context, canvas, angle)
+ 
+    static drawFigure(context, figure) {
+        for (let i = 0; i < 6; i++)
+        {
+            for (let j = 0; j < 10; j++)
+            {
+                if (j + 1 < 10)
+                    Utils.drawLine(context,figure[i * 10 + j], figure[i * 10 + j + 1], '#000000');
+                if (i + 1 < 6)
+                    Utils.drawLine(context,figure[i * 10 + j], figure[(i  + 1) * 10 + j], '#000000');
+            }
+        }
+    }
+    draw_field(context, canvas)
     {
         Utils.clear_window(context, canvas);
-        //Utils.drawAxiss(context, this.axisMap);
-        let new_arr = [];
-        this.axisMap.forEach( (item) => {
-            new_arr.push( Operations.rotate_ort(item, angle));
+
+        let rotated_arr = [];
+        this.figure.forEach( (item) => {
+            rotated_arr.push( Operations.rotate_ort(item, this.angle));
         });
-        Utils.drawAxiss(context, new_arr);
+        Utils.drawAxiss(context, this.axisMap);
+        App.drawFigure(context, rotated_arr);
+
+        // Utils.drawAxiss(context, this.axisMap);
+
+
+        //Utils.drawAxiss(context, this.axisMap);
+        // let rotated_arr = [];ww
+        // this.axisMap.forEach( (item) => {
+            // rotated_arr.push( Operations.rotate_ort(item, this.angle));
+        // });
+        //console.log(rotated_arr);        
+        // let new_arr = Operations.move_figure(rotated_arr, this.moved);
+        //console.log(new_arr);
+        // Utils.drawAxiss(context, new_arr);
         // Utils.drawFigure(context, new_arr);
     }
 
@@ -54,67 +84,33 @@ class App
 
         document.addEventListener('keydown', (e) => {
             let key = e.key;
-            //console.log(this.angle);
+            //console.log(key);
             if (key == 'w') {
                 this.angle[0] += 5;
-                this.draw_field(context, canvas, this.angle);
+                this.draw_field(context, canvas);
             }
             else if (key == 's') {
                 this.angle[0] += -5;
-                this.draw_field(context, canvas, this.angle);
+                this.draw_field(context, canvas);
             }
             else if (key == 'a') {
                 this.angle[1] += 5;
-                this.draw_field(context, canvas, this.angle);
+                this.draw_field(context, canvas);
             }
             else if (key == 'd') {
                 this.angle[1] += -5;
-                this.draw_field(context, canvas, this.angle);
+                this.draw_field(context, canvas);
             }
             else if (key == 'q') {
                 this.angle[2] += 5;
-                this.draw_field(context, canvas, this.angle);
+                this.draw_field(context, canvas);
             }
             else if (key == 'e') {
                 this.angle[2] += -5;
-                this.draw_field(context, canvas, this.angle);
+                this.draw_field(context, canvas);
             }
             else
                 return;
         });
-
-        // canvas.onmousedown = (e) => {
-        //     if (point === true) {
-        //         rot_p['x'] = e.x
-        //         rot_p['y'] = e.y;
-        //     }
-        //     if (point === false)
-        //     {
-        //         let moveAt = (e) => {
-        //             if (status == 0)
-        //                 this.figure = Operations.move_m(this.figure, moved, context, canvas, e);
-        //             else if (status == 1)
-        //                 this.figure = Operations.push_m(this.figure, moved, context, canvas, e);
-        //             else if (status == 2)
-        //                 this.figure = Operations.rotate_m(this.figure, rot_p, context, canvas, e);
-        //         };
-    
-        //         document.onmousemove = (e) => {
-        //             moveAt(e);
-        //         };
-    
-        //         canvas.onmouseup = (e) =>{
-        //             document.onmousemove = null;
-        //             canvas.onmouseup = null;
-        //         };
-        //         Utils.drawFigure(context, figure, canvas);
-        //         context.fillRect(rot_p['x'] , rot_p['y'] - 5, 5,5);
-        //     }
-        //     if (point === true) {
-        //         Utils.drawFigure(context, figure, canvas);
-        //         context.fillRect(rot_p['x'] , rot_p['y'] - 5, 5,5);
-        //     }
-            
-        // };
     }
 }
