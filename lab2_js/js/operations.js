@@ -30,20 +30,21 @@ class Operations
         (axis === 'z') ? (rotate = z_axis) : 0;
         let rotate_m = math.matrix(rotate);
         let figure_m = math.matrix(figure);
-        let mult_res = math.multiple(figure_m, rotate_m);
+        let mult_res = math.multiply(figure_m, rotate_m);
         return mult_res.valueOf();
     }
 
     static move_figure(figure, tab)
     {
-        let new_fig = [];
-        figure.forEach(element => {
-            let tmp = [];
-            tmp[0] = element[0] + tab[0];
-            tmp[1] = element[1] + tab[1];
-            tmp[2] = element[2] + tab[2];
-            new_fig.push(tmp);
-        });
+        let x = tab.x;
+        let y = tab.y;
+        let z = tab.z;
+        let move_arr = [
+            [1, 0, 0, 0],
+            [0, 1, 0, 0],
+            [0, 0, 1, 0],
+            [x, y, z, 1],
+        ];
         return new_fig;
     }
     

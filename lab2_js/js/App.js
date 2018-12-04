@@ -10,12 +10,6 @@ class App
     constructor()
     {
         this.figure = App.initialize_figure();
-        this.angle = [0, 0, 0];
-        this.moved = [1, 1, 1];
-        this.rot_p = {
-            'x': 0, 
-            'y': 0
-        };
         this.axisMap = [
             [0, 0 , 0],
             [0, 100, 0],
@@ -48,26 +42,12 @@ class App
             }
         }
     }
-    draw_field(context, canvas)
+    draw_field(context, canvas, angle, axis)
     {
         Utils.clear_window(context, canvas);
-        this.figure = Operations.rotate_ort(this.figure, this.angle)
+        this.figure = Operations.rotate_ort(this.figure, angle, axis)
         Utils.drawAxiss(context, this.axisMap);
-        App.drawFigure(context, rotated_arr);
-
-        // Utils.drawAxiss(context, this.axisMap);
-
-
-        //Utils.drawAxiss(context, this.axisMap);
-        // let rotated_arr = [];ww
-        // this.axisMap.forEach( (item) => {
-            // rotated_arr.push( Operations.rotate_ort(item, this.angle));
-        // });
-        //console.log(rotated_arr);        
-        // let new_arr = Operations.move_figure(rotated_arr, this.moved);
-        //console.log(new_arr);
-        // Utils.drawAxiss(context, new_arr);
-        // Utils.drawFigure(context, new_arr);
+        App.drawFigure(context, this.figure);
     }
 
     init()
@@ -76,34 +56,29 @@ class App
         let context = canvas.getContext("2d");
 
         Utils.clear_window(context, canvas);
-        this.draw_field(context, canvas, this.angle);
+        this.draw_field(context, canvas, 1, 'x');
+        this.draw_field(context, canvas, -1, 'y');
+        this.draw_field(context, canvas, 1, 'z');
 
         document.addEventListener('keydown', (e) => {
             let key = e.key;
-            //console.log(key);
             if (key == 'w') {
-                this.angle[0] += 5;
-                this.draw_field(context, canvas);
+                this.draw_field(context, canvas, 0.2, 'y');
             }
             else if (key == 's') {
-                this.angle[0] += -5;
-                this.draw_field(context, canvas);
+                this.draw_field(context, canvas, -0.2, 'y');
             }
             else if (key == 'a') {
-                this.angle[1] += 5;
-                this.draw_field(context, canvas);
+                this.draw_field(context, canvas, 0.2, 'x');
             }
             else if (key == 'd') {
-                this.angle[1] += -5;
-                this.draw_field(context, canvas);
+                this.draw_field(context, canvas, -0.2, 'x');
             }
             else if (key == 'q') {
-                this.angle[2] += 5;
-                this.draw_field(context, canvas);
+                this.draw_field(context, canvas, 0.2, 'z');
             }
             else if (key == 'e') {
-                this.angle[2] += -5;
-                this.draw_field(context, canvas);
+                this.draw_field(context, canvas, -0.2, 'z');
             }
             else
                 return;
