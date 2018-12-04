@@ -51,11 +51,7 @@ class App
     draw_field(context, canvas)
     {
         Utils.clear_window(context, canvas);
-
-        let rotated_arr = [];
-        this.figure.forEach( (item) => {
-            rotated_arr.push( Operations.rotate_ort(item, this.angle));
-        });
+        this.figure = Operations.rotate_ort(this.figure, this.angle)
         Utils.drawAxiss(context, this.axisMap);
         App.drawFigure(context, rotated_arr);
 

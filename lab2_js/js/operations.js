@@ -1,29 +1,37 @@
-
 class Operations
 {
 
-    static rotate_ort(point1, rot1)
+    static rotate_ort(figure, angle, axis)
     {
-        let point = {x:point1[0],y:point1[1],z:point1[2]}
-        let rot = {x:rot1[0],y:rot1[1],z:rot1[2]}
-        let od={x:0,y:0,z:0};
-        let dv={x:0,y:0,z:0};
-        let tr={x:0,y:0,z:0};
-        let rot_rad={x:0,y:0,z:0};
-    
-        rot_rad.x = rot.x * Math.PI / 180.0;
-        rot_rad.y = rot.y * Math.PI / 180.0;
-        rot_rad.z = rot.z * Math.PI / 180.0;
-        od.x = point.x;
-        od.y = point.y * Math.cos(rot_rad.x) + point.z * Math.sin(rot_rad.x);
-        od.z = point.z * Math.cos(rot_rad.x) - point.y * Math.sin(rot_rad.x);
-        dv.x = od.x * Math.cos(rot_rad.y) - od.z * Math.sin(rot_rad.y);
-        dv.y = od.y;
-        dv.z = od.z * Math.cos(rot_rad.y) + od.x * Math.sin(rot_rad.y);
-        tr.x = dv.x * Math.cos(rot_rad.z) + dv.y * Math.sin(rot_rad.z);
-        tr.y = dv.y * Math.cos(rot_rad.z) - dv.x * Math.sin(rot_rad.z);
-        tr.z = dv.z;
-        return [tr.x, tr.y, tr.z, 1];
+        let z_axis = [
+            [Math.cos(angle), -Math.sin(angle), 0, 0],
+            [Math.sin(angle), Math.cos(angle),  0, 0],
+            [0,               0,                1, 0],
+            [0,               0,                0, 1],
+        ];
+        
+        let y_axis = [
+            [Math.cos(angle), 0, -Math.sin(angle), 0],
+            [0,               1, 0,                0],
+            [Math.sin(angle), 0, Math.cos(angle),  0],
+            [0,               0, 0,                1],
+        ];
+
+        let x_axis = [
+            [1, 0,               0,                1],
+            [0, Math.cos(angle), -Math.sin(angle), 0],
+            [0, Math.sin(angle), Math.cos(angle),  0],
+            [0, 0,               0,                1],
+        ];
+
+        let rotate;
+        (axis === 'x') ? (rotate = x_axis) : 0;
+        (axis === 'y') ? (rotate = y_axis) : 0;
+        (axis === 'z') ? (rotate = z_axis) : 0;
+        let rotate_m = math.matrix(rotate);
+        let figure_m = math.matrix(figure);
+        let mult_res = math.multiple(figure_m, rotate_m);
+        return mult_res.valueOf();
     }
 
     static move_figure(figure, tab)
