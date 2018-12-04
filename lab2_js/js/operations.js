@@ -18,7 +18,7 @@ class Operations
         ];
 
         let x_axis = [
-            [1, 0,               0,                1],
+            [1, 0,               0,                0],
             [0, Math.cos(angle), -Math.sin(angle), 0],
             [0, Math.sin(angle), Math.cos(angle),  0],
             [0, 0,               0,                1],
@@ -34,8 +34,36 @@ class Operations
         return mult_res.valueOf();
     }
 
-    static move_figure(figure, tab)
+    static push_figure(figure, angle, axis)
     {
+        (angle > 0) ? (angle = 1.05) : (angle = 0.95);
+        let tab;
+        (axis === 'x') ? (tab = {x:angle, y:1, z:1}) : 0;
+        (axis === 'y') ? (tab = {x:1, y:angle, z:1}) : 0;
+        (axis === 'z') ? (tab = {x:1, y:1, z:angle}) : 0;
+        let x = tab.x;
+        let y = tab.y;
+        let z = tab.z;
+        let move_arr = [
+            [x, 0, 0, 0],
+            [0, y, 0, 0],
+            [0, 0, z, 0],
+            [0, 0, 0, 1],
+        ];
+
+        let move_m = math.matrix(move_arr);
+        let figure_m = math.matrix(figure);
+        let mult_res = math.multiply(figure_m, move_m);
+        return mult_res.valueOf();
+    }
+    
+    static move_figure(figure, angle, axis)
+    {
+        (angle > 0) ? (angle = 10) : (angle = -10);
+        let tab;
+        (axis === 'x') ? (tab = {x:angle, y:0, z:0}) : 0;
+        (axis === 'y') ? (tab = {x:0, y:angle, z:0}) : 0;
+        (axis === 'z') ? (tab = {x:0, y:0, z:angle}) : 0;
         let x = tab.x;
         let y = tab.y;
         let z = tab.z;
@@ -45,15 +73,35 @@ class Operations
             [0, 0, 1, 0],
             [x, y, z, 1],
         ];
-        return new_fig;
-    }
-    
-    static push_figure(figure, tab)
-    {
-        
-        return new_fig;
+
+        let move_m = math.matrix(move_arr);
+        let figure_m = math.matrix(figure);
+        let mult_res = math.multiply(figure_m, move_m);
+        return mult_res.valueOf();
     }
 
+    static reflect_figure(figure, angle, axis)
+    {
+        (angle > 0) ? (angle = 1) : (angle = -1);
+        let tab;
+        (axis === 'x') ? (tab = {x:angle, y:1, z:1}) : 0;
+        (axis === 'y') ? (tab = {x:1, y:angle, z:1}) : 0;
+        (axis === 'z') ? (tab = {x:1, y:1, z:angle}) : 0;
+        let x = tab.x;
+        let y = tab.y;
+        let z = tab.z;
+        let move_arr = [
+            [x, 0, 0, 0],
+            [0, y, 0, 0],
+            [0, 0, z, 0],
+            [0, 0, 0, 1],
+        ];
+
+        let move_m = math.matrix(move_arr);
+        let figure_m = math.matrix(figure);
+        let mult_res = math.multiply(figure_m, move_m);
+        return mult_res.valueOf();
+    }
 
     /*static move_help(mx, my, figure)
     {

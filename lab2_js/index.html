@@ -15,40 +15,44 @@
     <div id="canvas">
         <canvas id="myCanvas" width="800" height="500"></canvas>
     </div>
-    <!-- <div id="buttons">
+    <div id="buttons">
         Transform mode
         <div class='top_butt'>
             Move
-            <input type="button" name="move" value="move"/>
+            <input type="radio" name="transform" value="0"/>
         </div>
         <div class='butt'>
             Collapse
-            <input type="radio" name="move" value="move1" onclick="status = 1"/>
+            <input type="radio" name="transform" value="1"/>
         </div>
        <div class='butt'>
             Rotate
-            <input type="radio" name="move" value="cleat" onclick="status = 2"/>
+            <input type="radio" name="transform" value="2" checked/>
         </div> 
         <div class='butt'>
             Reflect
-            <input type="radio" name="move" value="reflect" onclick="status = 3"  checked />
+            <input type="radio" name="transform" value="3"/>
         </div>
     </div>
     <div id="buttons">
-        Reflect line
+        Projection type
         <div class='top_butt'>
-            <input id="a" type="input" name="reflect" value="3"/>
+            Ortogonal
+            <input type="radio" name="projection" value="0" checked/>
         </div>
         <div class='butt'>
-            <input id="b" type="input" name="reflect" value="100"/>
+            ..
+            <input type="radio" name="projection" value="1"/>
         </div>
+       <div class='butt'>
+            ..
+            <input type="radio" name="projection" value="2"/>
+        </div> 
         <div class='butt'>
-            <input type="button" name="refl" value="line" onclick="drawLine()" />
+            ..
+            <input type="radio" name="projection" value="3"/>
         </div>
-        <div class='butt'>
-            <input type="button" name="refl" value="reflect" onclick="reflect()" />
-        </div>
-    </div> -->
+    </div>
 </div>
 </body>
 </html>

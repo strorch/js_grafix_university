@@ -21,7 +21,7 @@
     position: relative;
     border: 1px solid gray;
     border-radius: 3px;
-    height: 16vw;
+    /* height: 16vw; */
 }
 
 .butt {
@@ -29,14 +29,10 @@
     flex-direction: column;
     margin-top: 1vw;
     margin: 10px 10px 10px 10px;
-    /*background-color: aquamarine;*/
-    /*border: none;*/
 }
 .top_butt {
     display: flex;
     flex-direction: column;
     margin-top: 1vw;
     margin: 10px 10px 10px 10px;
-    /*background-color: aquamarine;*/
-    /*border: none;*/
 }

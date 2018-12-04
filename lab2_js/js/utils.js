@@ -1,20 +1,30 @@
 class Utils 
 {
+    static initialize_figure()
+    {
+        let figure = [];
+
+        for (let i = 0; i < 6; i++) {
+            for (let j = 0; j < 10; j++) {
+                figure.push([i * 30, j * 30, Math.random()*15, 1]);
+            }
+        }
+        return figure;
+    }
+    
     static clear_window(context, canvas) {
         context.clearRect(0, 0, canvas.width, canvas.height);
     }
-    
+ 
     static drawFigure(context, figure) {
-        let i = -1;
-        while (++i < 6)
+        for (let i = 0; i < 6; i++)
         {
-            let j = -1;
-            while (++j < 10)
+            for (let j = 0; j < 10; j++)
             {
                 if (j + 1 < 10)
-                    Utils.drawLine(context,figure[i * 6 + j], figure[i * 6 + j + 1], '#000000');
+                    Utils.drawLine(context,figure[i * 10 + j], figure[i * 10 + j + 1], '#000000');
                 if (i + 1 < 6)
-                    Utils.drawLine(context,figure[i * 6 + j], figure[(i  + 1) * 6 + j], '#000000');
+                    Utils.drawLine(context,figure[i * 10 + j], figure[(i  + 1) * 10 + j], '#000000');
             }
         }
     }

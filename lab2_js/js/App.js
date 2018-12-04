@@ -9,7 +9,9 @@ class App
     */
     constructor()
     {
-        this.figure = App.initialize_figure();
+        this.figure = Utils.initialize_figure();
+        this.projection = 0;
+        this.moving = 2;
         this.axisMap = [
             [0, 0 , 0],
             [0, 100, 0],
@@ -18,70 +20,66 @@ class App
         ];
     }
 
-    static initialize_figure()
+    draw_field(context, canvas, key, handler)
     {
-        let figure = [];
-
-        for (let i = 0; i < 6; i++) {
-            for (let j = 0; j < 10; j++) {
-                figure.push([i * 30, j * 30, Math.random()*15, 1]);
-            }
+        if (key == 'w') {
+            this.figure = handler(this.figure, 0.2, 'y')
         }
-        return figure;
-    }
- 
-    static drawFigure(context, figure) {
-        for (let i = 0; i < 6; i++)
-        {
-            for (let j = 0; j < 10; j++)
-            {
-                if (j + 1 < 10)
-                    Utils.drawLine(context,figure[i * 10 + j], figure[i * 10 + j + 1], '#000000');
-                if (i + 1 < 6)
-                    Utils.drawLine(context,figure[i * 10 + j], figure[(i  + 1) * 10 + j], '#000000');
-            }
+        else if (key == 's') {
+            this.figure = handler(this.figure, -0.2, 'y')
         }
-    }
-    draw_field(context, canvas, angle, axis)
-    {
+        else if (key == 'a') {
+            this.figure = handler(this.figure, 0.2, 'x')
+        }
+        else if (key == 'd') {
+            this.figure = handler(this.figure, -0.2, 'x')
+        }
+        else if (key == 'q') {
+            this.figure = handler(this.figure, 0.2, 'z')
+        }
+        else if (key == 'e') {
+            this.figure = handler(this.figure, -0.2, 'z')
+        }
+        else if (key == null) {
+            this.figure = handler(this.figure, 0.2, 'x')
+            this.figure = handler(this.figure, -0.2, 'y')
+            this.figure = handler(this.figure, 0.2, 'z')
+        }
+        else
+            return;
         Utils.clear_window(context, canvas);
-        this.figure = Operations.rotate_ort(this.figure, angle, axis)
         Utils.drawAxiss(context, this.axisMap);
-        App.drawFigure(context, this.figure);
+        Utils.drawFigure(context, this.figure);
     }
 
     init()
     {
         let canvas = document.getElementById("myCanvas");
         let context = canvas.getContext("2d");
+        let projection = document.getElementsByName('projection');
+        let trans_mode = document.getElementsByName('transform');
+        
+        projection.forEach(x => {
+            x.onchange = (e) => {
+                this.projection = parseInt(e.target.value);
+            };
+        });
+        trans_mode.forEach(x => {
+            x.onchange = (e) => {
+                this.moving = parseInt(e.target.value);
+            };
+        });
 
-        Utils.clear_window(context, canvas);
-        this.draw_field(context, canvas, 1, 'x');
-        this.draw_field(context, canvas, -1, 'y');
-        this.draw_field(context, canvas, 1, 'z');
+        this.draw_field(context, canvas, null, Operations.rotate_ort);
 
         document.addEventListener('keydown', (e) => {
             let key = e.key;
-            if (key == 'w') {
-                this.draw_field(context, canvas, 0.2, 'y');
-            }
-            else if (key == 's') {
-                this.draw_field(context, canvas, -0.2, 'y');
-            }
-            else if (key == 'a') {
-                this.draw_field(context, canvas, 0.2, 'x');
-            }
-            else if (key == 'd') {
-                this.draw_field(context, canvas, -0.2, 'x');
-            }
-            else if (key == 'q') {
-                this.draw_field(context, canvas, 0.2, 'z');
-            }
-            else if (key == 'e') {
-                this.draw_field(context, canvas, -0.2, 'z');
-            }
-            else
-                return;
+            let handler;
+            (this.moving === 0) ? (handler = Operations.move_figure) : 0;
+            (this.moving === 1) ? (handler = Operations.push_figure) : 0;
+            (this.moving === 2) ? (handler = Operations.rotate_ort) : 0;
+            (this.moving === 3) ? (handler = Operations.reflect_figure) : 0;
+            this.draw_field(context, canvas, key, handler);
         });
     }
 }
