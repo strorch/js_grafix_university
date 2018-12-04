@@ -13,10 +13,10 @@ class App
         this.projection = 0;
         this.moving = 2;
         this.axisMap = [
-            [0, 0 , 0],
-            [0, 100, 0],
-            [100, 0, 0],
-            [0, 0, 100],
+            [0, 0 , 0, 1],
+            [0, 100, 0, 1],
+            [100, 0, 0, 1],
+            [0, 0, 100, 1],
         ];
     }
 
@@ -45,11 +45,12 @@ class App
             this.figure = handler(this.figure, -0.2, 'y')
             this.figure = handler(this.figure, 0.2, 'z')
         }
-        else
-            return;
+        else{}
+        let fg = Operations.projected(this.figure, this.projection);
+        let axis = Operations.projected(this.axisMap, this.projection);
         Utils.clear_window(context, canvas);
-        Utils.drawAxiss(context, this.axisMap);
-        Utils.drawFigure(context, this.figure);
+        Utils.drawAxiss(context, axis);
+        Utils.drawFigure(context, fg);
     }
 
     init()
@@ -62,6 +63,7 @@ class App
         projection.forEach(x => {
             x.onchange = (e) => {
                 this.projection = parseInt(e.target.value);
+                this.draw_field(context, canvas, 'kek', undefined);
             };
         });
         trans_mode.forEach(x => {
@@ -74,12 +76,12 @@ class App
 
         document.addEventListener('keydown', (e) => {
             let key = e.key;
-            let handler;
-            (this.moving === 0) ? (handler = Operations.move_figure) : 0;
-            (this.moving === 1) ? (handler = Operations.push_figure) : 0;
-            (this.moving === 2) ? (handler = Operations.rotate_ort) : 0;
-            (this.moving === 3) ? (handler = Operations.reflect_figure) : 0;
-            this.draw_field(context, canvas, key, handler);
+            let handler_move;
+            (this.moving === 0) ? (handler_move = Operations.move_figure) : 0;
+            (this.moving === 1) ? (handler_move = Operations.push_figure) : 0;
+            (this.moving === 2) ? (handler_move = Operations.rotate_ort) : 0;
+            (this.moving === 3) ? (handler_move = Operations.reflect_figure) : 0;
+            this.draw_field(context, canvas, key, handler_move);
         });
     }
 }
