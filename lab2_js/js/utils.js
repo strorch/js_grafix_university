@@ -11,6 +11,18 @@ class Utils
         }
         return figure;
     }
+
+    static drow_rotation_line(context, crazy_mode)
+    {
+        const f = crazy_mode.line_points[0];
+        const s = crazy_mode.line_points[1];
+        context.beginPath();
+        context.moveTo(f[0] + 800 / 2, -(f[1]) + 500 / 2);
+        context.lineTo(s[0] + 800 / 2, -(s[1]) + 500 / 2);
+        context.strokeStyle = '#330033';
+        context.closePath();
+        context.stroke();
+    }
     
     static clear_window(context, canvas) {
         context.clearRect(0, 0, canvas.width, canvas.height);

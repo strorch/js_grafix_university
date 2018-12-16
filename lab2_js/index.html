@@ -15,42 +15,50 @@
     <div id="canvas">
         <canvas id="myCanvas" width="800" height="500"></canvas>
     </div>
-    <div id="buttons">
-        Transform mode
-        <div class='top_butt'>
-            Move
-            <input type="radio" name="transform" value="0"/>
+    <div>
+        <div style="display: flex; flex-direction: row">
+            <div id="buttons">
+                Transform mode
+                <div class='top_butt'>
+                    Move
+                    <input type="radio" name="transform" value="0"/>
+                </div>
+                <div class='butt'>
+                    Collapse
+                    <input type="radio" name="transform" value="1"/>
+                </div>
+            <div class='butt'>
+                    Rotate
+                    <input type="radio" name="transform" value="2" checked/>
+                </div> 
+                <div class='butt'>
+                    Reflect
+                    <input type="radio" name="transform" value="3"/>
+                </div>
+            </div>
+            <div id="buttons">
+                Projection type
+                <div class='top_butt'>
+                    Ortogonal
+                    <input type="radio" name="projection" value="0"/>
+                </div>
+                <div class='butt'>
+                    Trymetria
+                    <input type="radio" name="projection" value="1"/>
+                </div>
+            <div class='butt'>
+                    Kabinet
+                    <input type="radio" name="projection" value="2"/>
+                </div> 
+                <div class='butt'>
+                    Three point
+                    <input type="radio" name="projection" value="3" checked/>
+                </div>
+            </div>
         </div>
-        <div class='butt'>
-            Collapse
-            <input type="radio" name="transform" value="1"/>
-        </div>
-       <div class='butt'>
-            Rotate
-            <input type="radio" name="transform" value="2" checked/>
-        </div> 
-        <div class='butt'>
-            Reflect
-            <input type="radio" name="transform" value="3"/>
-        </div>
-    </div>
-    <div id="buttons">
-        Projection type
-        <div class='top_butt'>
-            Ortogonal
-            <input type="radio" name="projection" value="0" checked/>
-        </div>
-        <div class='butt'>
-            Trymetria
-            <input type="radio" name="projection" value="1"/>
-        </div>
-       <div class='butt'>
-            Kabinet
-            <input type="radio" name="projection" value="2"/>
-        </div> 
-        <div class='butt'>
-            Three point
-            <input type="radio" name="projection" value="3"/>
+        <div class="butt" style="margin-left: 10px">
+            turbo mode
+            <input type='checkbox' id='turbo'/>
         </div>
     </div>
 </div>

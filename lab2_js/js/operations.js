@@ -1,5 +1,39 @@
 class Operations
 {
+    static line_rotate(figure, line)
+    {
+        let a = line[0][0];
+        let b = line[0][1];
+        let angle = 0.2;
+        let rotate_arr = [
+            [Math.cos(angle), -Math.sin(angle), 0, 0],
+            [Math.sin(angle), Math.cos(angle),  0, 0],
+            [0,               0,                1, 0],
+            [0,               0,                0, 1],
+        ];
+        let move_arr_to = [
+            [1, 0, 0, 0],
+            [0, 1, 0, 0],
+            [0, 0, 1, 0],
+            [-a, -b, 0, 1],
+        ];
+        let move_arr_back = [
+            [1, 0, 0, 0],
+            [0, 1, 0, 0],
+            [0, 0, 1, 0],
+            [a, b, 0, 1],
+        ];
+        let fig_m = math.matrix(figure);
+        let rotate_m = math.matrix(rotate_arr);
+        let move_to_m = math.matrix(move_arr_to);
+        let move_back_m = math.matrix(move_arr_back);
+
+        let f = math.multiply(move_to_m, rotate_m);
+        let s = math.multiply(f, move_back_m);
+        let result = math.multiply(fig_m, s);
+        return result.valueOf();
+    }
+
     static projected(figure, projection)
     {
         if (projection === 0)
@@ -19,10 +53,10 @@ class Operations
         ];
 
         let three_point = [
-            [Math.cos(60*Math.PI/180),  -Math.sin(60*Math.PI/180) * Math.sin(45*Math.PI/180), 0, -1/10],
-            [0,             Math.cos(45*Math.PI/180),                    0, -1/7],
-            [-Math.sin(60*Math.PI/180), -Math.cos(60*Math.PI/180) * Math.sin(45*Math.PI/180), 0, -1/13],
-            [0,                0,                                  0, 1],
+            [1,  0, 0, -1.0/500.0],
+            [0,  1, 0, -1.0/900.0],
+            [0,  0, 1, 1],
+            [0,  0, 0, 1],
         ];
 
         let projection_arr;
