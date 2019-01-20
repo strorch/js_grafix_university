@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="css/style.css" type="text/css" rel="stylesheet"/>
+    <script type="text/javascript" src="js/utils.js"></script>
+    <script type="text/javascript" src="js/lib/math.js"></script>
+    <script type="text/javascript" src="js/operations.js"></script>
+    <script type='text/javascript' src="js/spline.js"></script>
+    <script src="js/App.js"></script>
+    <script src="js/main.js"></script>
+</head>
+<body id="body" style="background-color: #f6f6f6">
+<div id="main_block">
+    <div id="canvas">
+        <canvas id="myCanvas" width="800" height="500"></canvas>
+    </div>
+    <div id="buttons">
+        Type
+        <div class='top_butt'>
+            Rotation result
+            <input type="radio" name="type" value="0" checked/>
+        </div>
+        <div class='butt'>
+            Cunsa
+            <input type="radio" name="type" value="1"/>
+        </div>
+       <div class='butt'>
+            B-spline
+            <input type="radio" name="type" value="2"/>
+        </div>
+    </div>
+    <div id="buttons">
+        Transform mode
+        <div class='top_butt'>
+            Move
+            <input type="radio" name="transform" value="0"/>
+        </div>
+        <div class='butt'>
+            Collapse
+            <input type="radio" name="transform" value="1"/>
+        </div>
+       <div class='butt'>
+            Rotate
+            <input type="radio" name="transform" value="2" checked/>
+        </div> 
+        <div class='butt'>
+            Reflect
+            <input type="radio" name="transform" value="3"/>
+        </div>
+    </div>
+</div>
+</body>
+</html>
