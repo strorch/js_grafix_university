@@ -60,7 +60,7 @@ class App
     static draw_figure(context, figure, type)
     {
         (type == 0) ? (SplineCalculation.draw_spline(context, figure)) : 0;
-        (type == 1) ? (Rotation.DrawRotation(figure, context)) : 0;
+        // (type == 1) ? (figure = []) : 0;
         // (type == 2) ? (figure = []) : 0;
     }
 
