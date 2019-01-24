@@ -3,16 +3,12 @@ class Rotation
     static createRotation()
     {
         const line =  [
-            [20, 20, 0,1],
-            [40, 75, 0,1],
-            [100, 50, 0,1],
-            [160, 100, 0,1],
-            // [150, 150, 0,1]
+            [0,     10,    10,      1],
+            [0,     50,    50,      1],
+            [0,     100,   100,     1],
+            [0,     160,   160,     1]
         ];
-        const rot = [
-            [100, 10, 80,1],
-            [10, 20, 90,1],
-        ];
+        const rot = [100, 0, 10, 1];
         
         let array_to_draw = [];
         for (let i = 0; i < line.length; i++)
@@ -35,17 +31,40 @@ class Rotation
                 }
             }
         }
-        // console.log(result);
         return result;
     }
 
     static DrawRotation(figure, context)
     {
-        console.log(figure);
-        /*for (let i = 0; i < figure.length; i++)
+        let new_arr= [];
+        for (let i = 0; i < 4; i++)
         {
-            if (i + 1 === figure.length)
-                Utils.drawLine(context, Operations.projected(figure[i]), Operations.projected(figure[i + 1]), '#ffffff');
-        }*/
+            new_arr[i] = [];
+            for (let j = 0; j < 12; j ++)
+            {
+                new_arr[i][j] = [];
+                for (let k = 0; k < 4; k++)
+                {
+                    new_arr[i][j].push(figure[i* 12*4 + j*4 + k]);
+                }
+            }
+        }
+        for (let j = 0; j < 12; j++)
+        {
+            for (let k = 0; k < 4; k++)
+            {
+                for (let i = 0; i < 4; i++)
+                {
+                    if (j + 1 !== 12)
+                        Utils.drawLine(context, Operations.projected(new_arr[i][j][k]), Operations.projected(new_arr[i][j + 1][k]), '#000000');
+                    if (k + 1 !== 4)
+                        Utils.drawLine(context, Operations.projected(new_arr[i][j][k]), Operations.projected(new_arr[i][j][k + 1]), '#000000');
+                    if (j + 1 === 12)
+                        Utils.drawLine(context, Operations.projected(new_arr[i][0][k]), Operations.projected(new_arr[i][11][k]), '#000000');
+                    if (k + 1 === 4)
+                        Utils.drawLine(context, Operations.projected(new_arr[i][j][0]), Operations.projected(new_arr[i][j][3]), '#000000');
+                }
+            }
+        }
     }
 }

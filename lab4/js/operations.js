@@ -2,8 +2,8 @@ class Operations
 {
     static line_rotate(figure, angle, line)
     {
-        let a = line[0][0];
-        let b = line[0][1];
+        let a = line[0];
+        let b = line[1];
         let rotate_arr = [
             [Math.cos(angle), -Math.sin(angle), 0, 0],
             [Math.sin(angle), Math.cos(angle),  0, 0],

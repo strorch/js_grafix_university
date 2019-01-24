@@ -51,17 +51,16 @@ class App
     static get_figure(type)
     {
         let figure;
-        console.log(type);
         (type == 0) ? (figure = SplineCalculation.SplineToArr(SplineCalculation.CreateSpline(Utils.initialize_spline_figure()))) : 0;
         (type == 1) ? (figure = Rotation.createRotation()) : 0;
-        // (type == 2) ? (figure = []) : 0;
+        (type == 2) ? (figure = Kunsa.createCunsa()) : 0;
         return figure;
     }
     static draw_figure(context, figure, type)
     {
         (type == 0) ? (SplineCalculation.draw_spline(context, figure)) : 0;
         (type == 1) ? (Rotation.DrawRotation(figure, context)) : 0;
-        // (type == 2) ? (figure = []) : 0;
+        (type == 2) ? (figure = Kunsa.DrawKunsa(figure, context)) : 0;
     }
 
     init()
