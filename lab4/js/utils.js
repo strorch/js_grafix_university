@@ -7,7 +7,11 @@ class Utils
         for (let i = 0; i < 4; i++) {
             let fig1 = []
             for (let j = 0; j < 4; j++) {
-                fig1.push([i * 30, j * 30, Math.random()*30, 1]);
+                if (i === 2 && j === 2) {
+                    fig1.push([i * 30, j * 30, 50, 1]);
+                }
+                else
+                    fig1.push([i * 30, j * 30, 1, 1]);
             }
             figure.push(fig1);
         }
